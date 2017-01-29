@@ -16,6 +16,8 @@ if ($sequence_passed_in) {
 
 # remove trailing newline character
 chomp $sequence;
+# convert string to all uppercase
+$sequence = uc $sequence;
 
 # split string into array of 3 characters
 my $lag = "a3" x ((length $sequence)/3);
@@ -68,7 +70,7 @@ foreach my $nuc (@sequence) {
 	elsif ($nuc eq 'G') { 
 		$countG += 1; 
 	}
-	elsif ($nuc eq 'T') { 
+	elsif ($nuc eq 'T') {
 		$countT += 1; 
 	}
 }
