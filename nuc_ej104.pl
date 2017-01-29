@@ -53,7 +53,7 @@ print "Number of TAG: $number_of_tag, TGA: $number_of_tga, TAA: $number_of_taa\n
 my @sequence = split("", $sequence);
 	print "@sequence\n";
 # number of characters in sequence.
-my $lngth = @sequence;
+my $sequence_length = @sequence;
 
 # use array to count nucliotides
 my $countA = 0;
@@ -76,10 +76,10 @@ foreach my $nuc (@sequence) {
 }
 
 # calculate percentages of each letter in sequence
-my $apercent = ($countA/$lngth)*100;
-my $cpercent = ($countC/$lngth)*100;
-my $gpercent = ($countG/$lngth)*100;
-my $tpercent = ($countT/$lngth)*100;
+my $apercent = ($countA/$sequence_length)*100;
+my $cpercent = ($countC/$sequence_length)*100;
+my $gpercent = ($countG/$sequence_length)*100;
+my $tpercent = ($countT/$sequence_length)*100;
 
 # round numbers to 2d.p.
 my $round_a = sprintf("%.2f", $apercent);
@@ -88,15 +88,15 @@ my $round_g = sprintf("%.2f", $gpercent);
 my $round_t = sprintf("%.2f", $tpercent);
 
 # number of "other characters" and its percentage within the sequence
-my $other = $lngth-($countA+$countC+$countG+$countT);
-my $opercent = ($other/$lngth)*100;
+my $other = $sequence_length-($countA+$countC+$countG+$countT);
+my $opercent = ($other/$sequence_length)*100;
 my $round_o = sprintf("%.2f", $opercent);
 
-print "The letter A occurs $countA out of $lngth times which is $round_a%\n";
-print "The letter C occurs $countC out of $lngth times which is $round_c%\n";
-print "The letter G occurs $countG out of $lngth times which is $round_g%\n";
-print "The letter T occurs $countT out of $lngth times which is $round_t%\n";
-print "There are $other incorrect letters out of $lngth in the sequence which is $round_o%\n";
+print "The letter A occurs $countA out of $sequence_length times which is $round_a%\n";
+print "The letter C occurs $countC out of $sequence_length times which is $round_c%\n";
+print "The letter G occurs $countG out of $sequence_length times which is $round_g%\n";
+print "The letter T occurs $countT out of $sequence_length times which is $round_t%\n";
+print "There are $other incorrect letters out of $sequence_length in the sequence which is $round_o%\n";
 
 # find a way to remove any letters that aren't a, c, t or g
 $sequence =~ s/[^acgt]//gi;
