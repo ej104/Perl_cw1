@@ -2,9 +2,17 @@
 use strict;
 use warnings;
 
-# ask user for a DNA sequence string and allow user to type in terminal.
-print "Type DNA sequence string: ";
-my $sequence = <STDIN>;
+# check if sequence passed in on the command line
+my $sequence_passed_in = $#ARGV + 1 > 0;
+my $sequence;
+if ($sequence_passed_in) {
+	$sequence = $ARGV[0]
+} else {
+	# ask user for a DNA sequence string and allow user to type in
+	# terminal.
+	print "Type DNA sequence string: ";
+	$sequence = <STDIN>;
+}
 
 # remove trailing newline character
 chomp $sequence;
@@ -14,7 +22,8 @@ my $lag = "a3" x ((length $sequence)/3);
 my @codons = unpack $lag, $sequence;
 print "@codons\n";
 
-# read each codon to see if it is a stop codon and counts the number of each stop codon
+# read each codon to see if it is a stop codon and counts the number of each
+# stop codon
 sub count_stop_codons {
 	my ($sequence, $stop_codon) = @_;
 	my $stop_codon_occurences = 0;
