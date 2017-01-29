@@ -36,7 +36,7 @@ close DIFFFILE;
 my @k = keys %gene;
 
 #create file to print combined data
-open (GODIFFFILE, ">$godifffile") or die "error creating $godifffile"
+open (GODIFFFILE, ">$godifffile") or die "error creating $godifffile";
 
 #looking through the key for matching genes in second file, then prints those genes with p-values and descriptions, separated by tabs
 foreach (@k) {
