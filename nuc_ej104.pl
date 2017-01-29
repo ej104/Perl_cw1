@@ -20,7 +20,7 @@ chomp $sequence;
 $sequence = uc $sequence;
 
 # split string into array of 3 characters
-my $lag = "a3" x ((length $sequence)/3);
+my $lag = "a3" x ((length $sequence) / 3);
 my @codons = unpack $lag, $sequence;
 print "@codons\n";
 
@@ -34,7 +34,7 @@ sub count_stop_codons {
 		my $substring = substr $sequence, $i, 3;
 
 		if ($stop_codon eq $substring) {
-			$stop_codon_occurences++;
+			$stop_codon_occurences += 1;
 		}
 	}
 
@@ -46,8 +46,8 @@ sub count_stop_codons {
 my $number_of_tag =  count_stop_codons($sequence, "TAG");
 my $number_of_tga =  count_stop_codons($sequence, "TGA");
 my $number_of_taa =  count_stop_codons($sequence, "TAA");
-my $sc_total = $number_of_tag + $number_of_tga + $number_of_taa;
-print "Number of TAG: $number_of_tag, TGA: $number_of_tga, TAA: $number_of_taa\nTotal = $sc_total\n";
+my $number_of_stopcodons = $number_of_tag + $number_of_tga + $number_of_taa;
+print "Number of TAG: $number_of_tag, TGA: $number_of_tga, TAA: $number_of_taa\nTotal = $number_of_stopcodons\n";
 
 # Convert string to array where each element is one character in length.
 my @sequence = split("", $sequence);
@@ -55,50 +55,50 @@ my @sequence = split("", $sequence);
 # number of characters in sequence.
 my $sequence_length = @sequence;
 
-# use array to count nucliotides
-my $countA = 0;
-my $countC = 0;
-my $countG = 0;
-my $countT = 0;
+# use array to count nucleotides
+my $count_a = 0;
+my $count_c = 0;
+my $count_g = 0;
+my $count_t = 0;
 foreach my $nuc (@sequence) {
 	if ($nuc eq 'A') { 
-		$countA += 1; 
+		$count_a += 1;
 	}
 	elsif ($nuc eq 'C') { 
-		$countC += 1; 
+		$count_c += 1;
 	}
 	elsif ($nuc eq 'G') { 
-		$countG += 1; 
+		$count_g += 1; 
 	}
 	elsif ($nuc eq 'T') {
-		$countT += 1; 
+		$count_t += 1;
 	}
 }
 
 # calculate percentages of each letter in sequence
-my $apercent = ($countA/$sequence_length)*100;
-my $cpercent = ($countC/$sequence_length)*100;
-my $gpercent = ($countG/$sequence_length)*100;
-my $tpercent = ($countT/$sequence_length)*100;
+my $percent_is_a = ($count_a / $sequence_length) * 100;
+my $percent_is_c = ($count_c / $sequence_length) * 100;
+my $percent_is_g = ($count_g / $sequence_length) * 100;
+my $percent_is_t = ($count_t / $sequence_length) * 100;
 
 # round numbers to 2d.p.
-my $round_a = sprintf("%.2f", $apercent);
-my $round_c = sprintf("%.2f", $cpercent);
-my $round_g = sprintf("%.2f", $gpercent);
-my $round_t = sprintf("%.2f", $tpercent);
+my $round_a = sprintf("%.2f", $percent_is_a);
+my $round_c = sprintf("%.2f", $percent_is_c);
+my $round_g = sprintf("%.2f", $percent_is_g);
+my $round_t = sprintf("%.2f", $percent_is_t);
 
 # number of "other characters" and its percentage within the sequence
-my $other = $sequence_length-($countA+$countC+$countG+$countT);
-my $opercent = ($other/$sequence_length)*100;
-my $round_o = sprintf("%.2f", $opercent);
+my $count_other = $sequence_length-($count_a + $count_c + $count_g + $count_t);
+my $percent_is_other = ($count_other / $sequence_length) * 100;
+my $round_o = sprintf("%.2f", $percent_is_other);
 
-print "The letter A occurs $countA out of $sequence_length times which is $round_a%\n";
-print "The letter C occurs $countC out of $sequence_length times which is $round_c%\n";
-print "The letter G occurs $countG out of $sequence_length times which is $round_g%\n";
-print "The letter T occurs $countT out of $sequence_length times which is $round_t%\n";
-print "There are $other incorrect letters out of $sequence_length in the sequence which is $round_o%\n";
+print "The letter A occurs $count_a out of $sequence_length times which is $round_a%\n";
+print "The letter C occurs $count_c out of $sequence_length times which is $round_c%\n";
+print "The letter G occurs $count_g out of $sequence_length times which is $round_g%\n";
+print "The letter T occurs $count_t out of $sequence_length times which is $round_t%\n";
+print "There are $count_other incorrect letters out of $sequence_length in the sequence which is $round_o%\n";
 
-# find a way to remove any letters that aren't a, c, t or g
+# remove any letters that aren't a, c, t or g
 $sequence =~ s/[^acgt]//gi;
 print "Without errors the sequence string is $sequence\n";
 
